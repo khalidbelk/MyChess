@@ -6,13 +6,15 @@
 ##
 
 from sys import argv, exit
+from src.user import User
 
 def usage():
     print('USAGE: ./mychess -u user -help')
     print('\tuser\tis the Chess.com username')
 
 def args_manager(args: list[str]):
-    user = ''
+    username = ''
+
     try:
         for i in range (len(args)):
             arg = args[i]
@@ -20,18 +22,21 @@ def args_manager(args: list[str]):
                 usage()
                 exit(0)
             if arg == '-u':
-                user = args[i + 1]
+                username = args[i + 1]
     except IndexError:
         print('Error: Missing argument(s). Use -help for more information.')
         exit(84)
 
-    if user == '':
+    if username == '':
         print('Username mising, please insert an username.')
         exit(84)
 
-    return user
+    return username
 
 if __name__ == '__main__':
-    user = args_manager(argv[1:])
-    print(user)
+    username = args_manager(argv[1:])
+    print("The username is", username)
+
+    user = User(username)
+    user.getData()
     exit(0)
