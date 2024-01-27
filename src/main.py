@@ -35,7 +35,6 @@ def args_manager(args: list[str]):
 
 if __name__ == '__main__':
     username = args_manager(argv[1:])
-    print("The username is", username)
 
     user = User(username)
     user.getData()
