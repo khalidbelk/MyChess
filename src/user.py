@@ -12,7 +12,7 @@ baseUrl = "https://api.chess.com/pub/player/"
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
 
 class User:
-    def __init__(self, username: str, year: None, month: None):
+    def __init__(self, username: str, year: int, month: int):
         self.username = username
         self.gamesyear = year
         self.gamesmonth = month
@@ -30,10 +30,6 @@ class User:
 
     def getPgn(self):
         try:
-            if self.gamesyear is None or self.gamesmonth is None:
-                print("Error: year or/and month arguments are missing.")
-                return
-
             url = f"{baseUrl}{self.username}/games/{self.gamesyear}/{self.gamesmonth}/pgn"
             print("The url is :", url)
             response = requests.get(url, headers=headers)
