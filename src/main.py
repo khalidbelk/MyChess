@@ -10,7 +10,9 @@ from src.user import User
 
 def usage():
     print('USAGE: ./mychess -u user [gamesYear gamesMonth]')
-    print('\tuser\tis the Chess.com username')
+    print('\tuser\t\tis the Chess.com username. This flag alone provides information about the user.')
+    print("\tgamesYear\tis the year of the user's games you want to download")
+    print("\tgamesMonth\tis the month of the user's games you want to download")
 
 def args_manager(args: list[str]):
     username = ''
