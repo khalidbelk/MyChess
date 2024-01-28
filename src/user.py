@@ -35,7 +35,7 @@ class User:
             response = requests.get(url, headers=headers)
             if response.status_code == 200:
                 print("Successful request")
-                with open('./filename.pgn', 'wb') as pgn_file:
+                with open(f'./{self.username}_{self.gamesmonth}_{self.gamesyear}.pgn', 'wb') as pgn_file:
                     pgn_file.write(response.content)
             else:
                 print("Request failed")
