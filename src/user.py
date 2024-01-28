@@ -12,17 +12,38 @@ baseUrl = "https://api.chess.com/pub/player/"
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
 
 class User:
-    def __init__(self, username: str):
+    def __init__(self, username: str, year: None, month: None):
         self.username = username
+        self.gamesyear = year
+        self.gamesmonth = month
 
     def getData(self):
         try:
             url = f"{baseUrl}{self.username}"
             response = requests.get(url, headers=headers)
-
             if response.status_code == 200:
                 parse_data(response.json())
             else:
                 print("Request failed")
+        except Exception as e:
+            print(f"An error occurred: {e}")
+
+    def getPgn(self):
+        try:
+            if self.gamesyear is None or self.gamesmonth is None:
+                print("Error: year or/and month arguments are missing.")
+                return
+
+            url = f"{baseUrl}{self.username}/games/{self.gamesyear}/{self.gamesmonth}/pgn"
+            print("The url is :", url)
+            response = requests.get(url, headers=headers)
+            if response.status_code == 200:
+                print("Successful request")
+                with open('./filename.pgn', 'wb') as pgn_file:
+                    pgn_file.write(response.content)
+                    #print(pgn_data)
+            else:
+                print("Request failed")
+          ##  https://api.chess.com/pub/player/{username}/games/{YYYY}/{MM}/pgn
         except Exception as e:
             print(f"An error occurred: {e}")
