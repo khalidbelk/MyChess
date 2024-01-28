@@ -22,6 +22,7 @@ $(NAME):
 clean:
 	@echo "\033[1;31m[Clean]\033[0m"
 	rm -f $(NAME)
+	rm -f *pgn
 
 fclean: clean
 	@rm -f $(NAME)
