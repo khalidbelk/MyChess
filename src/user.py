@@ -41,9 +41,7 @@ class User:
                 print("Successful request")
                 with open('./filename.pgn', 'wb') as pgn_file:
                     pgn_file.write(response.content)
-                    #print(pgn_data)
             else:
                 print("Request failed")
-          ##  https://api.chess.com/pub/player/{username}/games/{YYYY}/{MM}/pgn
         except Exception as e:
             print(f"An error occurred: {e}")
